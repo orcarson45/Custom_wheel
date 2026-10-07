@@ -1,1033 +1,714 @@
-<!doctype html>
-<html lang="en"><head><script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20260930-05-8966983","C":{"Abril Fatface":"YACgEZbkUVE,0","Alfa Slab One":"YACgEYS9sJU,0","Anton":"YACgEcYqQ-A,0","Archivo":"YACgEZulLoA,0","Arial Narrow":"YAGyDvJ_4Ts,0","Arial Rounded MT Bold":"YAFcfoaHu-s,0","Arial":"YAGyDvJ_4Ts,0","Avenir Next":"YAFcfmNq6UY,0","Baloo 2":"YADK30bC6HQ,0","Bebas Neue":"YACgESME5ew,0","Bricolage Grotesque":"YAFyMcdwzpc,0","Broken Glyph":"YADZ-exUkv0,0","Canva Sans":"YAFdJjTk5UU,1","Caveat":"YALBs2ploWQ,0","Comic Sans MS":"YAFcfvtOAUY,1","Cormorant Garamond":"YAFdJhX-538,0","Courier New":"YAGzXiGs0_8,0","Courier Prime":"YAD1aFjegN8,0","DM Sans":"YAD1aU3sLnI,0","DM Serif Display":"YAD1aYG82rc,0","Forum":"YACgEcnnqB4,0","Fraunces":"YAFdJpU7Kkk,0","Georgia":"YAGzXkO0pEM,0","Ghost Mono":"YAHQutsX00Q,0","Hanken Grotesk":"YAFcfhwp99E,0","Helvetica Neue":"YAFcf6CtJfI,0","Helvetica":"YAFcf6CtJfI,0","IBM Plex Mono":"YAFdJkmvhGI,0","Impact":"YAFcfnjI7Vk,0","Instrument Serif":"YAHFeOnZNEk,0","Inter":"YAFdJvSyp_k,3","Iowan Old Style":"YAGNIFa8j9o,0","Jacques Francois":"YADK3zbC6RM,0","JetBrains Mono":"YAFdJksXcAk,0","Josefin Sans":"YAFdJjvw9Ps,0","Lato":"YAFdJuFCnaw,0","Libre Baskerville":"YACgEUFdPdA,0","Lobster":"YAD8SnSjSFI,0","Lora":"YACgEXvxf8Q,0","Merriweather":"YACgEXvHxxs,0","Montserrat":"YAFdtQi73Xs,0","Nunito":"YAFdJoNRMmU,1","Oleo Script":"YACgEQQ14jI,0","Oswald":"YACgEQY10lw,0","Pacifico":"YADLjORQ1u4,0","Phantom Sans":"YAFdJvgJ5TU,0","Playfair Display":"YAFdJhem5V8,1","Plus Jakarta Sans":"YAGvf3_u0_Q,0","Poppins":"YAFdJjbTu24,1","Press Start 2P":"YAFyGr-8pmQ,0","Quicksand":"YAFdJpYtCxE,1","Raleway":"YAFdJhmxbVQ,1","Roboto Slab":"YAFdJswIKAg,0","Rockwell":"YAFcfyVZnN0,0","Rye":"YACgEdQP21k,0","Segoe UI":"YAHNdRD1Klw,0","Source Sans 3":"YAG4lO1Mj10,0","Source Serif 4":"YACgEfdj394,0","Space Grotesk":"YADZ-dYEmhg,0","Space Mono":"YADW1-vpsoc,0","Times New Roman":"YAGzXW3gftg,0","Times":"YAGzXW3gftg,0","Trebuchet MS":"YAFcfrglpVA,0","UV Display":"YAEdVfSSpYo,0","UV Sans":"YAFdJvgJ5TU,0","Ubuntu":"YACgERDU--Q,0","Verdana":"YAGzXTctYtQ,0","Work Sans":"YAGXhLOKv44,0","Yellowtail":"YACgEYG4kG4,0","ui-monospace":"YAD1aFjegN8,0","ui-sans-serif":"YACkoD1yZN0,0"}}');</script><script src="/_sdk/6542d56fbfe7a3eb.telemetry_sdk.js" integrity="sha512-ECdM0nK7EkwDuOqho2qxgyRQXyBHk9hZqRKMBr+Xsu6zjeHlt+qkO2N2YRiHN7Kg4e1fEHDhjIp4bGJYVypv1g=="></script>
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Party Spin Wheel</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&amp;family=Fraunces:opsz,wght@9..144,700;9..144,800&amp;display=swap" rel="stylesheet">
+
+  <title>Birthday Game Night</title>
+
   <style>
-    :root {
-      --ink: #19213b;
-      --cream: #fff8eb;
-      --pink: #ff4f8b;
-      --yellow: #ffcf3f;
-      --mint: #4fd1b6;
-      --lavender: #a88dff;
-      --paper: #fffdf6;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-
-    * { box-sizing: border-box; }
-
-    html { background: var(--cream); }
 
     body {
-      width: 100%;
-      min-height: calc(100 * min(var(--vh, 1vh), 1vh));
-      margin: 0;
-      overflow-x: hidden;
-      color: var(--ink);
-      font-family: "DM Sans", sans-serif;
-    }
-
-    button, input { font: inherit; }
-    button { -webkit-tap-highlight-color: transparent; }
-
-    button:focus-visible,
-    input:focus-visible {
-      outline: 3px solid var(--ink);
-      outline-offset: 3px;
-    }
-
-    .party-shell {
-      position: relative;
-      width: 100%;
-      min-height: calc(100 * min(var(--vh, 1vh), 1vh));
-      overflow: hidden;
-      background-color: var(--cream);
-      background-image:
-        radial-gradient(circle at 7% 13%, rgba(255, 207, 63, .52) 0 8px, transparent 9px),
-        radial-gradient(circle at 91% 14%, rgba(168, 141, 255, .35) 0 14px, transparent 15px),
-        radial-gradient(circle at 4% 70%, rgba(79, 209, 182, .30) 0 12px, transparent 13px),
-        radial-gradient(circle at 96% 74%, rgba(255, 79, 139, .27) 0 14px, transparent 15px);
-    }
-
-    .party-shell::before,
-    .party-shell::after {
-      position: absolute;
-      width: 280px;
-      height: 280px;
-      content: "";
-      pointer-events: none;
-      opacity: .28;
-      background: repeating-conic-gradient(from 16deg, #ff4f8b 0 10deg, transparent 10deg 28deg, #4fd1b6 28deg 38deg, transparent 38deg 57deg);
-    }
-
-    .party-shell::before {
-      top: -156px;
-      right: -112px;
-      transform: rotate(12deg);
-    }
-
-    .party-shell::after {
-      bottom: -170px;
-      left: -126px;
-      transform: rotate(62deg);
-    }
-
-    .confetti-dot {
-      position: absolute;
-      z-index: 0;
-      width: 11px;
-      height: 11px;
-      border-radius: 3px;
-      animation: bob 3.4s ease-in-out infinite;
-    }
-
-    .d1 { top: 164px; left: 5%; background: var(--mint); transform: rotate(25deg); }
-    .d2 { top: 340px; right: 4%; background: var(--yellow); animation-delay: -.8s; transform: rotate(35deg); }
-    .d3 { bottom: 80px; right: 11%; background: var(--lavender); animation-delay: -1.6s; border-radius: 50%; }
-
-    @keyframes bob {
-      50% { translate: 0 -9px; rotate: 16deg; }
-    }
-
-    .main-wrap {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 1580px;
-      margin: 0 auto;
-      padding: 18px 28px 44px;
-    }
-
-    .title-font { font-family: "Fraunces", serif; }
-
-    .intro-banner {
-      position: relative;
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 18px;
-      align-items: center;
-      padding: 15px 24px;
-      border: 3px solid var(--ink);
-      border-radius: 22px;
-      box-shadow: 7px 7px 0 var(--ink);
-    }
-
-    .intro-banner::after {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      color: rgba(25, 33, 59, .28);
-      font-size: 24px;
-      letter-spacing: 7px;
-      content: "✦ ✦ ✦";
-      transform: rotate(8deg);
-    }
-
-    .banner-badge {
-      display: grid;
-      width: 50px;
-      height: 50px;
-      place-items: center;
-      border: 2px solid var(--ink);
-      border-radius: 15px;
-      background: var(--paper);
-    }
-
-    .hero-stage {
-      display: grid;
-      grid-template-columns: minmax(500px, 1fr) minmax(265px, 330px);
-      gap: clamp(20px, 3vw, 42px);
-      align-items: center;
-      min-height: calc(100 * min(var(--vh, 1vh), 1vh) - 150px);
-      padding: 18px 2px 24px;
-    }
-
-    .wheel-zone {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        repeating-linear-gradient(
+          -45deg,
+          #000000 0px,
+          #000000 18px,
+          #111111 18px,
+          #111111 36px
+        );
+      color: white;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
-      min-width: 0;
+      align-items: center;
+      padding: 25px;
     }
 
-    .wheel-heading {
-      margin: 0 0 4px;
+    .app {
+      width: 100%;
+      max-width: 850px;
+      background: #000;
+      border: 3px solid #ff4fa3;
+      border-radius: 25px;
+      padding: 25px;
+      box-shadow:
+        0 0 20px rgba(255, 79, 163, 0.6),
+        0 0 50px rgba(255, 79, 163, 0.25);
       text-align: center;
     }
 
-    .wheel-stage {
+    /* -------------------------
+       BANNER
+    ------------------------- */
+
+    .banner {
+      width: 100%;
+      min-height: 150px;
+      border-radius: 18px;
+      margin-bottom: 25px;
+
+      background:
+        repeating-linear-gradient(
+          -45deg,
+          #ff4fa3 0px,
+          #ff4fa3 15px,
+          #ff78b9 15px,
+          #ff78b9 30px
+        );
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      border: 2px solid white;
+      overflow: hidden;
       position: relative;
-      display: grid;
-      width: min(100%, 760px, calc(100 * min(var(--vh, 1vh), 1vh) - 205px));
-      min-width: 350px;
-      aspect-ratio: 1;
-      margin: 4px auto 12px;
-      place-items: center;
     }
 
-    .wheel-halo {
-      position: absolute;
-      inset: 4%;
+    .banner-text {
+      position: relative;
+      z-index: 2;
+      color: white;
+      text-shadow:
+        3px 3px 0 #000,
+        0 0 10px rgba(0,0,0,0.6);
+    }
+
+    .banner-text h1 {
+      font-family: Georgia, serif;
+      font-size: clamp(2rem, 7vw, 4rem);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .banner-text p {
+      font-size: 1rem;
+      letter-spacing: 4px;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    /* -------------------------
+       WHEEL AREA
+    ------------------------- */
+
+    .wheel-container {
+      position: relative;
+      width: min(75vw, 600px);
+      aspect-ratio: 1 / 1;
+      margin: 20px auto 30px;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
-      background: #ffe4a4;
-      transform: rotate(-8deg);
+      box-shadow:
+        0 0 0 8px #000,
+        0 0 0 11px #ff4fa3,
+        0 0 30px rgba(255, 79, 163, 0.7);
     }
 
-    #wheel-canvas {
-      position: relative;
-      z-index: 1;
-      width: 91%;
-      height: 91%;
-      filter: drop-shadow(0 11px 0 rgba(25, 33, 59, .20));
-    }
+    /* Pointer */
 
     .pointer {
       position: absolute;
-      top: 0;
-      z-index: 3;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+
       width: 0;
       height: 0;
-      border-top: 56px solid var(--ink);
-      border-right: 27px solid transparent;
-      border-left: 27px solid transparent;
-      filter: drop-shadow(0 3px 0 var(--paper));
+
+      border-left: 25px solid transparent;
+      border-right: 25px solid transparent;
+      border-top: 55px solid white;
+
+      filter:
+        drop-shadow(0 0 3px #000)
+        drop-shadow(0 0 8px #ff4fa3);
     }
 
-    .wheel-center {
-      position: absolute;
-      z-index: 2;
-      display: grid;
-      width: 74px;
-      height: 74px;
-      place-items: center;
-      pointer-events: none;
-      color: var(--ink);
-      border: 6px solid var(--ink);
-      border-radius: 50%;
-      background: var(--paper);
-      box-shadow: 0 3px 0 rgba(25, 33, 59, .2);
+    /* -------------------------
+       SPIN BUTTON
+    ------------------------- */
+
+    #spinButton {
+      border: none;
+      background: linear-gradient(
+        135deg,
+        #ff4fa3,
+        #ff86bd
+      );
+      color: white;
+
+      font-size: 1.4rem;
+      font-weight: 900;
+
+      padding: 16px 50px;
+      border-radius: 50px;
+
+      cursor: pointer;
+
+      text-transform: uppercase;
+      letter-spacing: 2px;
+
+      box-shadow:
+        0 5px 0 #a51f61,
+        0 0 20px rgba(255, 79, 163, 0.7);
+
+      transition: all 0.15s ease;
     }
 
-    .spin-button,
-    .again-button,
-    .add-button,
-    .palette-button,
-    .restore-button {
-      border: 3px solid var(--ink);
-      font-weight: 800;
-      transition: transform .16s ease, box-shadow .16s ease, filter .16s ease;
+    #spinButton:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 7px 0 #a51f61,
+        0 0 30px rgba(255, 79, 163, 0.9);
     }
 
-    .spin-button {
-      min-width: 250px;
-      box-shadow: 5px 5px 0 var(--ink);
+    #spinButton:active {
+      transform: translateY(4px);
+      box-shadow:
+        0 2px 0 #a51f61;
     }
 
-    .spin-button:hover:not(:disabled),
-    .again-button:hover,
-    .add-button:hover,
-    .palette-button:hover,
-    .restore-button:hover {
-      transform: translate(-2px, -2px);
-      box-shadow: 6px 6px 0 var(--ink);
-    }
-
-    .spin-button:active:not(:disabled),
-    .again-button:active,
-    .add-button:active,
-    .palette-button:active,
-    .restore-button:active {
-      transform: translate(1px, 1px);
-      box-shadow: 1px 1px 0 var(--ink);
-    }
-
-    .spin-button:disabled {
+    #spinButton:disabled {
+      opacity: 0.6;
       cursor: not-allowed;
-      opacity: .55;
+      transform: none;
     }
 
-    .result-rail {
+    /* -------------------------
+       RESULT
+    ------------------------- */
+
+    .result-box {
+      margin-top: 30px;
+      padding: 20px;
+
+      background: #111;
+      border: 2px solid #ff4fa3;
+      border-radius: 18px;
+
+      min-height: 100px;
+
       display: flex;
       flex-direction: column;
       justify-content: center;
-      min-height: 100%;
-    }
-
-    .result-box {
-      width: 100%;
-      padding: 25px 20px;
-      text-align: center;
-      border: 3px solid var(--ink);
-      border-radius: 24px;
-      box-shadow: 8px 8px 0 var(--ink);
-    }
-
-    .result-star {
-      display: grid;
-      width: 58px;
-      height: 58px;
-      margin: -54px auto 12px;
-      place-items: center;
-      color: var(--ink);
-      border: 3px solid var(--ink);
-      border-radius: 18px;
-      background: var(--yellow);
-      transform: rotate(-8deg);
-    }
-
-    .result-name {
-      min-height: 98px;
-      margin: 9px 0 14px;
-      overflow-wrap: anywhere;
-      color: var(--ink);
-      font-family: "Fraunces", serif;
-      font-size: clamp(2rem, 3.5vw, 3.5rem);
-      font-weight: 800;
-      line-height: 1.02;
-    }
-
-    .result-note {
-      margin: 0 auto 12px;
-      color: #40506f;
-      font-size: .95rem;
-      font-weight: 600;
-      line-height: 1.4;
-    }
-
-    .settings-section {
-      margin-top: 4px;
-      padding: 22px;
-      border: 3px solid var(--ink);
-      border-radius: 27px;
-      background: rgba(255, 253, 246, .76);
-      box-shadow: 8px 8px 0 var(--ink);
-    }
-
-    .settings-heading-row {
-      display: flex;
-      gap: 12px;
       align-items: center;
-      margin: 0 0 18px;
     }
 
-    .settings-mark,
-    .section-badge {
-      display: grid;
-      flex: 0 0 auto;
-      width: 38px;
-      height: 38px;
-      place-items: center;
-      border: 2px solid var(--ink);
-      border-radius: 11px;
-      background: var(--yellow);
+    .result-label {
+      color: #ff78b9;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: bold;
+      margin-bottom: 8px;
     }
 
-    .settings-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.15fr) minmax(320px, .85fr);
-      gap: 18px;
+    #result {
+      color: white;
+      font-family: Georgia, serif;
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
+      font-weight: bold;
     }
 
-    .settings-panel {
-      padding: 20px;
-      border: 2px solid var(--ink);
-      border-radius: 18px;
-      background: var(--paper);
+    /* -------------------------
+       FOOTER
+    ------------------------- */
+
+    .footer {
+      margin-top: 20px;
+      color: #aaa;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
     }
 
-    .section-title-row {
-      display: flex;
-      gap: 11px;
-      align-items: center;
-      margin-bottom: 14px;
-    }
+    /* -------------------------
+       MOBILE
+    ------------------------- */
 
-    .option-list {
-      display: grid;
-      gap: 8px;
-      max-height: 210px;
-      padding-right: 4px;
-      overflow-y: auto;
-    }
+    @media (max-width: 600px) {
 
-    .option-row {
-      display: grid;
-      grid-template-columns: 25px minmax(0, 1fr) auto;
-      gap: 8px;
-      align-items: center;
-      padding: 7px;
-      border: 2px solid var(--ink);
-      border-radius: 12px;
-      background: white;
-    }
-
-    .segment-dot {
-      width: 19px;
-      height: 19px;
-      border: 2px solid var(--ink);
-      border-radius: 50%;
-    }
-
-    .option-name {
-      width: 100%;
-      min-width: 0;
-      padding: 7px 9px;
-      color: var(--ink);
-      font-weight: 600;
-      border: 2px solid #cfd3dd;
-      border-radius: 8px;
-      background: var(--paper);
-    }
-
-    .row-actions {
-      display: flex;
-      gap: 4px;
-    }
-
-    .mini-button {
-      display: grid;
-      width: 29px;
-      height: 29px;
-      place-items: center;
-      color: var(--ink);
-      border: 2px solid var(--ink);
-      border-radius: 8px;
-      background: var(--paper);
-      transition: background .15s ease, transform .15s ease;
-    }
-
-    .mini-button:hover:not(:disabled) {
-      background: var(--yellow);
-      transform: translateY(-1px);
-    }
-
-    .mini-button.delete:hover:not(:disabled) { background: #ffbfd4; }
-
-    .mini-button:disabled {
-      cursor: not-allowed;
-      opacity: .35;
-    }
-
-    .add-row {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 9px;
-      margin-top: 12px;
-    }
-
-    .new-option {
-      min-width: 0;
-      padding: 9px 11px;
-      color: var(--ink);
-      border: 2px solid var(--ink);
-      border-radius: 11px;
-      background: white;
-    }
-
-    .palette-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 7px;
-    }
-
-    .palette-button {
-      min-height: 60px;
-      padding: 6px;
-      color: var(--ink);
-      border-radius: 11px;
-      background: var(--paper);
-      font-size: .75rem;
-      line-height: 1.05;
-    }
-
-    .palette-button.active {
-      background: var(--yellow);
-      box-shadow: inset 0 0 0 2px var(--paper);
-    }
-
-    .swatches {
-      display: flex;
-      justify-content: center;
-      gap: 3px;
-      margin-bottom: 5px;
-    }
-
-    .swatches span {
-      width: 10px;
-      height: 10px;
-      border: 1px solid var(--ink);
-      border-radius: 50%;
-    }
-
-    .color-list {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 7px;
-      margin-top: 13px;
-    }
-
-    .color-row {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 39px;
-      gap: 8px;
-      align-items: center;
-      padding: 6px 8px;
-      overflow: hidden;
-      font-size: .8rem;
-      font-weight: 700;
-      border-radius: 10px;
-      background: #f3f0ff;
-    }
-
-    .color-name {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .color-picker {
-      width: 37px;
-      height: 28px;
-      padding: 2px;
-      cursor: pointer;
-      border: 2px solid var(--ink);
-      border-radius: 7px;
-      background: white;
-    }
-
-    .notice {
-      min-height: 20px;
-      margin: 9px 0 0;
-      color: #a82152;
-      font-size: .82rem;
-      font-weight: 700;
-    }
-
-    .empty-list {
-      padding: 15px;
-      color: #5e6679;
-      text-align: center;
-      border: 2px dashed #aeb4c1;
-      border-radius: 13px;
-      background: #f7f7f5;
-      font-size: .9rem;
-    }
-
-    @media (max-width: 1060px) {
-      .hero-stage {
-        grid-template-columns: minmax(430px, 1fr) minmax(245px, 290px);
-        gap: 22px;
+      body {
+        padding: 10px;
       }
 
-      .wheel-stage {
-        width: min(100%, 680px, calc(100 * min(var(--vh, 1vh), 1vh) - 220px));
-      }
-
-      .settings-grid { grid-template-columns: 1fr 1fr; }
-      .color-list { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 800px) {
-      .main-wrap { padding: 18px 18px 34px; }
-
-      .hero-stage {
-        grid-template-columns: 1fr;
-        min-height: auto;
-        padding-top: 25px;
-      }
-
-      .wheel-stage {
-        width: min(100%, 590px);
-        min-width: 0;
-      }
-
-      .result-rail {
-        width: min(100%, 620px);
-        margin: 24px auto 0;
-      }
-
-      .result-box { padding-top: 31px; }
-      .settings-grid { grid-template-columns: 1fr; }
-      .color-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-
-    @media (max-width: 560px) {
-      .main-wrap { padding: 14px 13px 28px; }
-
-      .intro-banner {
-        grid-template-columns: 1fr;
-        gap: 8px;
-        padding: 17px;
-        border-radius: 19px;
-        box-shadow: 5px 5px 0 var(--ink);
-      }
-
-      .intro-banner::after,
-      .banner-badge { display: none; }
-
-      .wheel-stage { margin-top: 7px; }
-      .pointer { border-top-width: 46px; border-right-width: 22px; border-left-width: 22px; }
-      .wheel-center { width: 58px; height: 58px; border-width: 5px; }
-      .spin-button { min-width: 0; width: 100%; }
-      .result-name { min-height: 70px; }
-
-      .settings-section {
+      .app {
         padding: 15px;
-        border-radius: 20px;
-        box-shadow: 5px 5px 0 var(--ink);
+        border-radius: 18px;
       }
 
-      .settings-panel { padding: 15px; }
-      .palette-grid { grid-template-columns: 1fr; }
-      .color-list { grid-template-columns: 1fr; }
+      .banner {
+        min-height: 120px;
+      }
+
+      .wheel-container {
+        width: 88vw;
+      }
+
+      #spinButton {
+        width: 90%;
+        font-size: 1.1rem;
+      }
     }
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js" type="text/javascript"></script>
-  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
-  <script src="/_sdk/6c2ecc939521f244.data_sdk.js" type="text/javascript" integrity="sha512-gRx8s+XsZDN6mSIQu2sivLZysbV0WHhb5kXNUWlgVb5lCMU1foJYukyMEDPv8Tnoocb8iwqB4XdRrWc7oEGzIQ=="></script>
-  <script src="/_sdk/6e4b845d05dd79e4.editing_sdk.js" type="text/javascript" integrity="sha512-nfDAoBO2Sn6o6rLYgdnzgUs0nZfi4v1NV7M2ioocHZ6oj+ZnIEUmJGLGqFu2dnCue3Bjs5kWMae4qsFt05LfIA=="></script>
-  <script src="/_sdk/ddcab3e45959c817.resizing_sdk.js" type="text/javascript" integrity="sha512-VAviUKfZVzugWBSeULYjSljTX+nb84wc6Zzbx5GQaQgh6X2ISSjXi8eIiCDGdwDh10esJMY0+QFQgUy9NcrTlQ=="></script>
- </head>
- <body data-template-id="__page-root" style="background: rgb(255, 248, 235);">
-  <div class="party-shell">
-   <span class="confetti-dot d1" aria-hidden="true"></span> <span class="confetti-dot d2" aria-hidden="true"></span> <span class="confetti-dot d3" aria-hidden="true"></span>
-   <main class="main-wrap">
-    <header data-template-id="hero-banner" class="canva-banner intro-banner" style="background: rgb(255, 207, 63);">
-     <div class="banner-badge" aria-hidden="true">
-      <i data-lucide="party-popper" style="width:27px;height:27px"></i>
-     </div>
-     <div>
-      <p data-template-id="eyebrow-text" class="canva-text m-0 text-xs font-extrabold uppercase tracking-[0.18em]" style="color: rgb(25, 33, 59); font-weight: 800; font-style: normal; font-size: 12px; letter-spacing: 0.12rem;">MAKE THE PARTY MOVE</p>
-      <h1 data-template-id="page-title" class="canva-text title-font m-0 mt-1 max-w-3xl font-extrabold leading-tight" style="color: rgb(25, 33, 59); font-weight: 800; font-style: normal; font-size: 32px;">Spin into something fun</h1>
-      <p data-template-id="page-subtitle" class="canva-text m-0 mt-1 max-w-3xl font-semibold leading-relaxed" style="color: rgb(25, 33, 59); font-weight: 600; font-style: normal; font-size: 17px; line-height: 1.4;">Choose the activities, make it colorful, then let the wheel decide the next big moment.</p>
-     </div>
-    </header>
-    <section class="hero-stage" aria-labelledby="wheel-heading">
-     <div class="wheel-zone">
-      <h2 id="wheel-heading" data-template-id="wheel-heading-text" class="canva-text title-font wheel-heading font-extrabold" style="color: rgb(25, 33, 59); font-weight: 800; font-style: normal; font-size: 24px;">Tonight’s activity</h2>
-      <div class="wheel-stage" aria-label="Party activity wheel">
-       <div class="wheel-halo" aria-hidden="true"></div>
-       <div class="pointer" aria-hidden="true"></div>
-       <canvas id="wheel-canvas" role="img" aria-label="A colorful wheel of party activities"></canvas>
-       <div class="wheel-center" aria-hidden="true">
-        <i data-lucide="sparkles" style="width:27px;height:27px"></i>
-       </div>
-      </div><button id="spin-button" data-template-id="spin-button-text" class="canva-button spin-button rounded-2xl px-9 py-4" type="button" style="background: rgb(255, 79, 139); color: rgb(255, 255, 255); font-weight: 800; font-style: normal; font-size: 18px;">SPIN THE WHEEL!</button>
-     </div>
-     <aside class="result-rail" aria-label="Selected activity">
-      <div data-template-id="result-panel" class="canva-panel result-box" aria-live="polite" style="background: rgb(238, 253, 247);">
-       <div class="result-star" aria-hidden="true">
-        <i data-lucide="trophy" style="width:28px;height:28px"></i>
-       </div>
-       <p data-template-id="result-prompt" class="canva-text m-0 font-extrabold uppercase tracking-[0.12em]" style="color: rgb(25, 33, 59); font-weight: 800; font-style: normal; font-size: 13px; letter-spacing: 0.1rem;">Your activity is…</p>
-       <p id="result-name" class="result-name" aria-live="polite">Ready to party!</p>
-       <p data-template-id="result-note" class="canva-text result-note" style="color: rgb(64, 80, 111); font-weight: 600; font-style: normal; font-size: 15px;">The wheel has spoken. Make it a moment!</p><button id="again-button" data-template-id="spin-again-text" class="canva-button again-button hidden rounded-xl px-5 py-3" type="button" style="background: rgb(79, 209, 182); color: rgb(25, 33, 59); font-weight: 800; font-style: normal; font-size: 14px;">Spin again</button>
+</head>
+
+<body>
+
+  <div class="app">
+
+    <!-- =========================
+         BANNER
+    ========================== -->
+
+    <div class="banner">
+
+      <!--
+        OPTIONAL:
+        Replace this entire banner-text section
+        with your own image if you want.
+
+        Example:
+
+        <img src="your-banner.jpg"
+             alt="Birthday Banner"
+             style="width:100%; height:100%; object-fit:cover;">
+      -->
+
+      <div class="banner-text">
+        <h1>25 & Fabulous</h1>
+        <p>GAME NIGHT</p>
       </div>
-     </aside>
-    </section>
-    <section data-template-id="settings-section" class="canva-section settings-section" aria-labelledby="settings-heading" style="background: rgb(255, 253, 246);">
-     <div class="settings-heading-row">
-      <span class="settings-mark" aria-hidden="true"><i data-lucide="sliders-horizontal" style="width:21px;height:21px"></i></span>
-      <div>
-       <h2 id="settings-heading" data-template-id="settings-title" class="canva-text m-0 font-extrabold" style="color: rgb(25, 33, 59); font-weight: 800; font-style: normal; font-size: 24px;">Wheel settings</h2>
-       <p data-template-id="settings-helper" class="canva-text m-0 mt-1 font-medium" style="color: rgb(83, 93, 117); font-weight: 500; font-style: normal; font-size: 14px;">Fine-tune your choices and colors below.</p>
-      </div>
-     </div>
-     <div class="settings-grid">
-      <section data-template-id="activities-panel" class="canva-panel settings-panel" aria-labelledby="options-heading" style="background: rgb(255, 253, 246);">
-       <div class="section-title-row">
-        <span class="section-badge" aria-hidden="true"><i data-lucide="list-music" style="width:21px;height:21px"></i></span>
-        <div>
-         <h3 id="options-heading" data-template-id="options-title" class="canva-text m-0 font-extrabold" style="color: rgb(25, 33, 59); font-weight: 800; font-style: normal; font-size: 20px;">Activity list</h3>
-         <p data-template-id="options-helper" class="canva-text m-0 text-sm font-medium" style="color: rgb(83, 93, 117); font-weight: 500; font-style: normal; font-size: 14px;">Rename, reorder, or add your own.</p>
-        </div>
-       </div>
-       <div id="option-list" class="option-list"></div>
-       <div id="empty-list" data-template-id="empty-list-message" class="canva-text empty-list hidden" style="color: rgb(94, 102, 121); font-weight: 600; font-style: normal; font-size: 14px;">Your wheel is empty. Add an activity to get the party started.</div>
-       <form id="add-option-form" class="add-row">
-        <label class="sr-only" for="new-option-input">New activity name</label> <input id="new-option-input" class="new-option" type="text" maxlength="44" autocomplete="off" placeholder="New activity"> <button data-template-id="add-option-button" class="canva-button add-button rounded-xl px-4 py-2" type="submit" style="background: rgb(255, 207, 63); color: rgb(25, 33, 59); font-weight: 800; font-style: normal; font-size: 15px;">Add</button>
-       </form>
-       <p id="options-notice" class="notice" role="status" aria-live="polite"></p>
-      </section>
-      <section data-template-id="colors-panel" class="canva-panel settings-panel" aria-labelledby="colors-heading" style="background: rgb(255, 253, 246);">
-       <div class="section-title-row">
-        <span class="section-badge" style="background:#ffb4d0" aria-hidden="true"><i data-lucide="palette" style="width:21px;height:21px"></i></span>
-        <div>
-         <h3 id="colors-heading" data-template-id="colors-title" class="canva-text m-0 font-extrabold" style="color: rgb(25, 33, 59); font-weight: 800; font-style: normal; font-size: 20px;">Color studio</h3>
-         <p data-template-id="colors-helper" class="canva-text m-0 text-sm font-medium" style="color: rgb(83, 93, 117); font-weight: 500; font-style: normal; font-size: 14px;">Pick a palette or tune each slice.</p>
-        </div>
-       </div>
-       <div class="palette-grid" aria-label="Choose a wheel color palette">
-        <button class="palette-button active" type="button" data-palette="party" aria-pressed="true"> <span class="swatches" aria-hidden="true"><span style="background:#ff5b92"></span><span style="background:#ffcf3f"></span><span style="background:#4fd1b6"></span></span> Party Pop </button> <button class="palette-button" type="button" data-palette="candy" aria-pressed="false"> <span class="swatches" aria-hidden="true"><span style="background:#ff8ab7"></span><span style="background:#9c82f6"></span><span style="background:#78caff"></span></span> Candy </button> <button class="palette-button" type="button" data-palette="sunset" aria-pressed="false"> <span class="swatches" aria-hidden="true"><span style="background:#f26a4f"></span><span style="background:#f9b233"></span><span style="background:#8a4fff"></span></span> Sunset </button>
-       </div>
-       <div id="color-list" class="color-list" aria-label="Individual segment colors"></div><button id="restore-colors" data-template-id="restore-colors-button" class="canva-button restore-button mt-4 w-full rounded-xl px-4 py-3" type="button" style="background: rgb(168, 141, 255); color: rgb(25, 33, 59); font-weight: 800; font-style: normal; font-size: 14px;">Restore balanced default colors</button>
-      </section>
-     </div>
-    </section>
-   </main>
-  </div>
-  <template id="option-row-template">
-   <div class="option-row">
-    <span class="segment-dot" aria-hidden="true"></span> <label class="sr-only">Activity name</label> <input class="option-name" type="text" maxlength="44" autocomplete="off">
-    <div class="row-actions">
-     <button class="mini-button move-up" type="button" aria-label="Move activity up"><i data-lucide="chevron-up" style="width:17px;height:17px"></i></button> <button class="mini-button move-down" type="button" aria-label="Move activity down"><i data-lucide="chevron-down" style="width:17px;height:17px"></i></button> <button class="mini-button delete" type="button" aria-label="Delete activity"><i data-lucide="trash-2" style="width:15px;height:15px"></i></button>
+
     </div>
-   </div>
-  </template>
-  <template id="color-row-template">
-   <label class="color-row"> <span class="color-name"></span> <input class="color-picker" type="color" aria-label="Choose segment color"> </label>
-  </template>
-  <script>
-    const defaultPalette = ["#ff5b92", "#ffcf3f", "#4fd1b6", "#a88dff", "#ff9e4f", "#70b7ff"];
-    const palettes = {
-      party: defaultPalette,
-      candy: ["#ff8ab7", "#9c82f6", "#78caff", "#84ddb7", "#ffc65b", "#ff9b80"],
-      sunset: ["#f26a4f", "#f9b233", "#fa7c54", "#8a4fff", "#e64b83", "#21b9b0"]
-    };
 
-    let options = [
-      { id: crypto.randomUUID(), name: "Charades", color: defaultPalette[0] },
-      { id: crypto.randomUUID(), name: "Dance battle", color: defaultPalette[1] },
-      { id: crypto.randomUUID(), name: "Trivia", color: defaultPalette[2] },
-      { id: crypto.randomUUID(), name: "Pictionary", color: defaultPalette[3] },
-      { id: crypto.randomUUID(), name: "Musical chairs", color: defaultPalette[4] },
-      { id: crypto.randomUUID(), name: "Two truths and a lie", color: defaultPalette[5] }
-    ];
 
-    let rotation = 0;
-    let isSpinning = false;
+    <!-- =========================
+         WHEEL
+    ========================== -->
 
-    const canvas = document.getElementById("wheel-canvas");
-    const ctx = canvas.getContext("2d");
-    const optionList = document.getElementById("option-list");
-    const colorList = document.getElementById("color-list");
-    const emptyList = document.getElementById("empty-list");
-    const spinButton = document.getElementById("spin-button");
-    const resultName = document.getElementById("result-name");
-    const againButton = document.getElementById("again-button");
-    const notice = document.getElementById("options-notice");
+    <div class="wheel-container">
 
-    function escapeText(text) {
-      return text.trim() || "Untitled activity";
-    }
+      <div class="pointer"></div>
 
-    function setNotice(message) {
-      notice.textContent = message;
-    }
+      <canvas id="wheel" width="600" height="600"></canvas>
 
-    function resizeCanvas() {
-      const cssSize = Math.floor(canvas.getBoundingClientRect().width);
-      const pixelSize = Math.floor(cssSize * window.devicePixelRatio);
-      if (pixelSize && canvas.width !== pixelSize) {
-        canvas.width = pixelSize;
-        canvas.height = pixelSize;
-      }
-      drawWheel();
-    }
+    </div>
 
-    function drawWheel() {
-      const width = canvas.width;
-      if (!width) return;
 
-      const scale = window.devicePixelRatio;
-      const size = width / scale;
-      const center = size / 2;
-      const radius = size * 0.468;
+    <!-- =========================
+         BUTTON
+    ========================== -->
 
-      ctx.setTransform(scale, 0, 0, scale, 0, 0);
-      ctx.clearRect(0, 0, size, size);
+    <button id="spinButton">
+      ✨ SPIN THE WHEEL ✨
+    </button>
 
-      if (!options.length) {
-        ctx.beginPath();
-        ctx.arc(center, center, radius, 0, Math.PI * 2);
-        ctx.fillStyle = "#e4e6eb";
-        ctx.fill();
-        ctx.lineWidth = 5;
-        ctx.strokeStyle = "#19213b";
-        ctx.stroke();
-        ctx.fillStyle = "#5e6679";
-        ctx.font = `700 ${Math.max(16, size * 0.045)}px DM Sans`;
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText("Add an activity", center, center - 10);
-        ctx.fillText("to fill the wheel!", center, center + 16);
-        return;
-      }
 
-      const segment = (Math.PI * 2) / options.length;
-      const startOffset = -Math.PI / 2 - segment / 2 + rotation;
+    <!-- =========================
+         RESULT
+    ========================== -->
+
+    <div class="result-box">
+
+      <div class="result-label">
+        Your Game Is...
+      </div>
+
+      <div id="result">
+        Ready?
+      </div>
+
+    </div>
+
+
+    <div class="footer">
+      💗 LET THE GAMES BEGIN 💗
+    </div>
+
+  </div>
+
+
+<script>
+
+  /* ==========================================
+     GAME OPTIONS
+  ========================================== */
+
+  const games = [
+    "Who Knows Me Best",
+    "Would I Rather",
+    "Custom Board Game",
+    "UNO",
+    "TV Show Trivia",
+    "Do or Drink",
+    "Put a Finger Down",
+    "Intoxicated"
+  ];
+
+
+  /* ==========================================
+     WHEEL COLORS
+  ========================================== */
+
+  const colors = [
+    "#ff4fa3",
+    "#000000",
+    "#ff78b9",
+    "#111111",
+    "#ff4fa3",
+    "#000000",
+    "#ff78b9",
+    "#111111"
+  ];
+
+
+  /* ==========================================
+     CANVAS SETUP
+  ========================================== */
+
+  const canvas = document.getElementById("wheel");
+  const ctx = canvas.getContext("2d");
+
+  const spinButton = document.getElementById("spinButton");
+  const result = document.getElementById("result");
+
+  const centerX = canvas.width / 2;
+  const centerY = canvas.height / 2;
+
+  const radius = canvas.width / 2 - 8;
+
+  const sliceAngle = (2 * Math.PI) / games.length;
+
+
+  /* ==========================================
+     DRAW THE WHEEL
+  ========================================== */
+
+  function drawWheel(rotation = 0) {
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (let i = 0; i < games.length; i++) {
+
+      const startAngle =
+        rotation + i * sliceAngle;
+
+      const endAngle =
+        startAngle + sliceAngle;
+
+
+      /* Slice */
+
+      ctx.beginPath();
+
+      ctx.moveTo(centerX, centerY);
+
+      ctx.arc(
+        centerX,
+        centerY,
+        radius,
+        startAngle,
+        endAngle
+      );
+
+      ctx.closePath();
+
+      ctx.fillStyle = colors[i];
+
+      ctx.fill();
+
+
+      /* Slice border */
+
+      ctx.strokeStyle = "#ffffff";
+      ctx.lineWidth = 3;
+
+      ctx.stroke();
+
+
+      /* Text */
 
       ctx.save();
-      ctx.shadowColor = "rgba(25,33,59,.16)";
-      ctx.shadowBlur = 0;
-      ctx.shadowOffsetY = 7;
-      ctx.beginPath();
-      ctx.arc(center, center, radius, 0, Math.PI * 2);
-      ctx.fillStyle = "#19213b";
-      ctx.fill();
+
+      ctx.translate(centerX, centerY);
+
+      ctx.rotate(
+        startAngle + sliceAngle / 2
+      );
+
+      ctx.textAlign = "right";
+      ctx.textBaseline = "middle";
+
+      ctx.fillStyle = "#ffffff";
+
+      ctx.font =
+        "bold 17px Arial";
+
+      /* Split longer titles */
+
+      const words =
+        games[i].split(" ");
+
+      let lines = [];
+      let currentLine = "";
+
+      words.forEach(word => {
+
+        const testLine =
+          currentLine + " " + word;
+
+        if (
+          ctx.measureText(testLine).width >
+          radius * 0.55
+        ) {
+
+          lines.push(currentLine.trim());
+
+          currentLine = word;
+
+        } else {
+
+          currentLine = testLine;
+
+        }
+
+      });
+
+      if (currentLine) {
+        lines.push(currentLine.trim());
+      }
+
+
+      const lineHeight = 21;
+
+      lines.forEach((line, index) => {
+
+        ctx.fillText(
+          line,
+          radius - 20,
+          (index -
+            (lines.length - 1) / 2) *
+            lineHeight
+        );
+
+      });
+
       ctx.restore();
 
-      options.forEach((option, index) => {
-        const start = startOffset + index * segment;
-        const end = start + segment;
-
-        ctx.beginPath();
-        ctx.moveTo(center, center);
-        ctx.arc(center, center, radius - 4, start, end);
-        ctx.closePath();
-        ctx.fillStyle = option.color;
-        ctx.fill();
-        ctx.lineWidth = 3;
-        ctx.strokeStyle = "#19213b";
-        ctx.stroke();
-
-        const angle = start + segment / 2;
-        ctx.save();
-        ctx.translate(center, center);
-        ctx.rotate(angle);
-        ctx.fillStyle = "#19213b";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-
-        const maxFont = options.length <= 6 ? size * 0.047 : size * 0.038;
-        const fontSize = Math.max(10, Math.min(maxFont, 22));
-        ctx.font = `800 ${fontSize}px DM Sans`;
-
-        const maxTextWidth = radius * .57;
-        const words = escapeText(option.name).split(/\s+/);
-        const lines = [];
-        let line = "";
-
-        words.forEach(word => {
-          const candidate = line ? `${line} ${word}` : word;
-          if (ctx.measureText(candidate).width > maxTextWidth && line) {
-            lines.push(line);
-            line = word;
-          } else {
-            line = candidate;
-          }
-        });
-
-        if (line) lines.push(line);
-
-        const shown = lines.slice(0, 3);
-        if (lines.length > 3) {
-          shown[2] = `${shown[2].slice(0, Math.max(2, shown[2].length - 1))}…`;
-        }
-
-        const lineHeight = fontSize * 1.12;
-        shown.forEach((lineText, lineIndex) => {
-          ctx.fillText(lineText, radius * .62, (lineIndex - (shown.length - 1) / 2) * lineHeight);
-        });
-        ctx.restore();
-      });
-
-      ctx.beginPath();
-      ctx.arc(center, center, radius, 0, Math.PI * 2);
-      ctx.lineWidth = 6;
-      ctx.strokeStyle = "#19213b";
-      ctx.stroke();
     }
 
-    function renderEditors() {
-      optionList.innerHTML = "";
-      colorList.innerHTML = "";
-      emptyList.classList.toggle("hidden", options.length !== 0);
-      spinButton.disabled = options.length === 0 || isSpinning;
 
-      options.forEach((option, index) => {
-        const row = document.getElementById("option-row-template").content.cloneNode(true);
-        const rowEl = row.querySelector(".option-row");
-        const input = row.querySelector(".option-name");
-        const dot = row.querySelector(".segment-dot");
-        const up = row.querySelector(".move-up");
-        const down = row.querySelector(".move-down");
-        const remove = row.querySelector(".delete");
+    /* Center circle */
 
-        rowEl.dataset.optionId = option.id;
-        input.value = option.name;
-        input.setAttribute("aria-label", `Rename activity ${index + 1}`);
-        dot.style.background = option.color;
-        up.disabled = index === 0 || isSpinning;
-        down.disabled = index === options.length - 1 || isSpinning;
-        remove.disabled = isSpinning;
+    ctx.beginPath();
 
-        input.addEventListener("input", () => {
-          option.name = input.value;
-          renderColorNames();
-          drawWheel();
-        });
+    ctx.arc(
+      centerX,
+      centerY,
+      50,
+      0,
+      Math.PI * 2
+    );
 
-        input.addEventListener("blur", () => {
-          if (!input.value.trim()) {
-            option.name = "Untitled activity";
-            input.value = option.name;
-            setNotice("Blank names are shown as “Untitled activity”.");
-            renderColorNames();
-            drawWheel();
-          }
-        });
+    ctx.fillStyle = "#000";
+    ctx.fill();
 
-        up.addEventListener("click", () => moveOption(index, index - 1));
-        down.addEventListener("click", () => moveOption(index, index + 1));
-        remove.addEventListener("click", () => {
-          options.splice(index, 1);
-          setNotice("Activity removed.");
-          renderEditors();
-          drawWheel();
-        });
+    ctx.strokeStyle = "#ff4fa3";
+    ctx.lineWidth = 6;
+    ctx.stroke();
 
-        optionList.appendChild(row);
 
-        const colorRow = document.getElementById("color-row-template").content.cloneNode(true);
-        const colorName = colorRow.querySelector(".color-name");
-        const picker = colorRow.querySelector(".color-picker");
+    /* Center decoration */
 
-        colorName.textContent = escapeText(option.name);
-        picker.value = option.color;
-        picker.disabled = isSpinning;
-        picker.setAttribute("aria-label", `Choose color for ${escapeText(option.name)}`);
+    ctx.fillStyle = "#ff4fa3";
 
-        picker.addEventListener("input", () => {
-          option.color = picker.value;
-          const matchingDot = optionList.querySelector(`[data-option-id="${option.id}"] .segment-dot`);
-          if (matchingDot) matchingDot.style.background = option.color;
-          drawWheel();
-          clearPaletteSelection();
-        });
+    ctx.font = "bold 20px Arial";
 
-        colorList.appendChild(colorRow);
-      });
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
 
-      lucide.createIcons();
-    }
+    ctx.fillText(
+      "25",
+      centerX,
+      centerY
+    );
 
-    function renderColorNames() {
-      document.querySelectorAll(".color-name").forEach((nameEl, index) => {
-        if (options[index]) nameEl.textContent = escapeText(options[index].name);
-      });
-    }
+  }
 
-    function moveOption(from, to) {
-      if (to < 0 || to >= options.length || isSpinning) return;
-      const moved = options.splice(from, 1)[0];
-      options.splice(to, 0, moved);
-      setNotice("Activity order updated.");
-      renderEditors();
-      drawWheel();
-    }
 
-    function clearPaletteSelection() {
-      document.querySelectorAll(".palette-button").forEach(button => {
-        button.classList.remove("active");
-        button.setAttribute("aria-pressed", "false");
-      });
-    }
+  /* ==========================================
+     SPIN LOGIC
+  ========================================== */
 
-    function applyPalette(paletteName) {
-      const palette = palettes[paletteName];
-      options.forEach((option, index) => {
-        option.color = palette[index % palette.length];
-      });
+  let currentRotation = 0;
 
-      document.querySelectorAll(".palette-button").forEach(button => {
-        const selected = button.dataset.palette === paletteName;
-        button.classList.toggle("active", selected);
-        button.setAttribute("aria-pressed", String(selected));
-      });
+  let spinning = false;
 
-      const displayName = paletteName === "party" ? "Party Pop" : `${paletteName[0].toUpperCase()}${paletteName.slice(1)}`;
-      setNotice(`${displayName} palette applied.`);
-      renderEditors();
-      drawWheel();
-    }
 
-    function addOption(event) {
-      event.preventDefault();
-      if (isSpinning) return;
+  spinButton.addEventListener("click", () => {
 
-      const input = document.getElementById("new-option-input");
-      const value = input.value.trim();
+    if (spinning) return;
 
-      if (!value) {
-        setNotice("Type an activity name before adding it.");
-        input.focus();
-        return;
-      }
+    spinning = true;
 
-      options.push({
-        id: crypto.randomUUID(),
-        name: value,
-        color: defaultPalette[options.length % defaultPalette.length]
-      });
+    spinButton.disabled = true;
 
-      input.value = "";
-      setNotice(`Added “${value}”.`);
-      clearPaletteSelection();
-      renderEditors();
-      drawWheel();
-      input.focus();
-    }
+    result.textContent = "Spinning...";
 
-    function spinWheel() {
-      if (isSpinning || !options.length) return;
 
-      isSpinning = true;
-      spinButton.disabled = true;
-      againButton.classList.add("hidden");
-      setNotice("Spinning the wheel…");
+    /*
+      Pick a random winning game
+    */
 
-      const winnerIndex = Math.floor(Math.random() * options.length);
-      const segment = (Math.PI * 2) / options.length;
-      const currentNormalized = ((rotation % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
-      const desiredNormalized = ((-winnerIndex * segment) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
-      const deltaNormalized = ((desiredNormalized - currentNormalized) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
-      const startRotation = rotation;
-      const totalRotation = (Math.PI * 2 * (6 + Math.floor(Math.random() * 3))) + deltaNormalized;
-      const duration = 4200 + Math.floor(Math.random() * 700);
-      const startedAt = performance.now();
+    const winningIndex =
+      Math.floor(
+        Math.random() * games.length
+      );
 
-      function animate(now) {
-        const progress = Math.min((now - startedAt) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 4);
-        rotation = startRotation + totalRotation * eased;
-        drawWheel();
 
-        if (progress < 1) {
-          requestAnimationFrame(animate);
-          return;
-        }
+    /*
+      We want the selected slice to
+      finish underneath the pointer.
 
-        rotation = startRotation + totalRotation;
-        isSpinning = false;
+      The pointer is at the top
+      (-90 degrees).
+    */
+
+    const targetAngle =
+      -Math.PI / 2
+      -
+      (
+        winningIndex * sliceAngle
+        +
+        sliceAngle / 2
+      );
+
+
+    /*
+      Add several full rotations
+      for a dramatic spin.
+    */
+
+    const extraSpins =
+      5 + Math.floor(Math.random() * 3);
+
+
+    const finalRotation =
+      currentRotation
+      +
+      extraSpins * Math.PI * 2
+      +
+      normalizeAngle(
+        targetAngle - currentRotation
+      );
+
+
+    const startRotation =
+      currentRotation;
+
+
+    const rotationDifference =
+      finalRotation - startRotation;
+
+
+    const duration = 5000;
+
+    const startTime =
+      performance.now();
+
+
+    function animate(currentTime) {
+
+      const elapsed =
+        currentTime - startTime;
+
+      const progress =
+        Math.min(elapsed / duration, 1);
+
+
+      /*
+        Ease-out animation.
+        Starts fast and gradually slows down.
+      */
+
+      const eased =
+        1 - Math.pow(1 - progress, 4);
+
+
+      currentRotation =
+        startRotation
+        +
+        rotationDifference * eased;
+
+
+      drawWheel(currentRotation);
+
+
+      if (progress < 1) {
+
+        requestAnimationFrame(animate);
+
+      } else {
+
+        currentRotation =
+          finalRotation;
+
+        drawWheel(currentRotation);
+
+        result.textContent =
+          games[winningIndex];
+
+        spinning = false;
+
         spinButton.disabled = false;
-        resultName.textContent = escapeText(options[winnerIndex].name);
-        againButton.classList.remove("hidden");
-        setNotice("A new party activity has been chosen!");
-        renderEditors();
+
       }
 
-      requestAnimationFrame(animate);
     }
 
-    document.getElementById("add-option-form").addEventListener("submit", addOption);
-    spinButton.addEventListener("click", spinWheel);
-    againButton.addEventListener("click", spinWheel);
-    document.getElementById("restore-colors").addEventListener("click", () => applyPalette("party"));
 
-    document.querySelectorAll(".palette-button").forEach(button => {
-      button.addEventListener("click", () => applyPalette(button.dataset.palette));
-    });
+    requestAnimationFrame(animate);
 
-    window.addEventListener("resize", resizeCanvas);
+  });
 
-    document.addEventListener("DOMContentLoaded", () => {
-      lucide.createIcons();
-      renderEditors();
-      resizeCanvas();
-    });
-  </script>
- 
-</body></html>
+
+  /* ==========================================
+     NORMALIZE ANGLE
+  ========================================== */
+
+  function normalizeAngle(angle) {
+
+    return (
+      (angle + Math.PI * 2)
+      %
+      (Math.PI * 2)
+    );
+
+  }
+
+
+  /* ==========================================
+     INITIAL DRAW
+  ========================================== */
+
+  drawWheel();
+
+</script>
+
+</body>
+</html>
+```
