@@ -1,352 +1,667 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Birthday Game Night</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      min-height: 100vh;
-      font-family: Arial, Helvetica, sans-serif;
-      background:
-        repeating-linear-gradient(
-          -45deg,
-          #000000 0px,
-          #000000 18px,
-          #111111 18px,
-          #111111 36px
-        );
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 25px;
-    }
-
-    .app {
-      width: 100%;
-      max-width: 850px;
-      background: #000;
-      border: 3px solid #ff4fa3;
-      border-radius: 25px;
-      padding: 25px;
-      box-shadow:
-        0 0 20px rgba(255, 79, 163, 0.6),
-        0 0 50px rgba(255, 79, 163, 0.25);
-      text-align: center;
-    }
-
-    /* -------------------------
-       BANNER
-    ------------------------- */
-
-    .banner {
-      width: 100%;
-      min-height: 150px;
-      border-radius: 18px;
-      margin-bottom: 25px;
-
-      background:
-        repeating-linear-gradient(
-          -45deg,
-          #ff4fa3 0px,
-          #ff4fa3 15px,
-          #ff78b9 15px,
-          #ff78b9 30px
-        );
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      border: 2px solid white;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .banner-text {
-      position: relative;
-      z-index: 2;
-      color: white;
-      text-shadow:
-        3px 3px 0 #000,
-        0 0 10px rgba(0,0,0,0.6);
-    }
-
-    .banner-text h1 {
-      font-family: Georgia, serif;
-      font-size: clamp(2rem, 7vw, 4rem);
-      letter-spacing: 3px;
-      text-transform: uppercase;
-    }
-
-    .banner-text p {
-      font-size: 1rem;
-      letter-spacing: 4px;
-      font-weight: bold;
-      margin-top: 5px;
-    }
-
-    /* -------------------------
-       WHEEL AREA
-    ------------------------- */
-
-    .wheel-container {
-      position: relative;
-      width: min(75vw, 600px);
-      aspect-ratio: 1 / 1;
-      margin: 20px auto 30px;
-    }
-
-    canvas {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      box-shadow:
-        0 0 0 8px #000,
-        0 0 0 11px #ff4fa3,
-        0 0 30px rgba(255, 79, 163, 0.7);
-    }
-
-    /* Pointer */
-
-    .pointer {
-      position: absolute;
-      top: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10;
-
-      width: 0;
-      height: 0;
-
-      border-left: 25px solid transparent;
-      border-right: 25px solid transparent;
-      border-top: 55px solid white;
-
-      filter:
-        drop-shadow(0 0 3px #000)
-        drop-shadow(0 0 8px #ff4fa3);
-    }
-
-    /* -------------------------
-       SPIN BUTTON
-    ------------------------- */
-
-    #spinButton {
-      border: none;
-      background: linear-gradient(
-        135deg,
-        #ff4fa3,
-        #ff86bd
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Birthday Game Night</title> <style> * { box-sizing: border-box; margin: 0; padding: 0; }
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+  }
+  
+  body {
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+      repeating-linear-gradient(
+        -45deg,
+        #000000 0px,
+        #000000 18px,
+        #111111 18px,
+        #111111 36px
       );
-      color: white;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    overflow: hidden;
+  }
+  
+  .app {
+    width: 100%;
+    height: calc(100vh - 24px);
+    max-width: 1500px;
+    background: #000;
+    border: 3px solid #f78dc0;
+    border-radius: 25px;
+    padding: 14px;
+    box-shadow:
+      0 0 20px rgba(250, 128, 187, 0.6),
+      0 0 50px rgba(255, 79, 163, 0.25);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  /* =========================
+     BANNER
+  ========================== */
+  
+  .banner {
+    width: 100%;
+    height: clamp(90px, 17vh, 145px);
+    flex-shrink: 0;
+    border-radius: 18px;
+  
+    background:
+      repeating-linear-gradient(
+        -45deg,
+        #f778b5 0px,
+        #f887be 15px,
+        #faaad1 15px,
+        #ecbbd3 30px
+      );
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    border: 2px solid white;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .banner-text {
+    position: relative;
+    z-index: 2;
+    color: white;
+    text-align: center;
+  
+    text-shadow:
+      3px 3px 0 #000,
+      0 0 10px rgba(0, 0, 0, 0.6);
+  }
+  
+  .banner-text h1 {
+    font-family: Georgia, serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  
+  .banner-text p {
+    font-size: clamp(0.75rem, 1.5vw, 1rem);
+    letter-spacing: 4px;
+    font-weight: bold;
+    margin-top: 3px;
+  }
+  
+  /* =========================
+     MAIN GAME AREA
+  ========================== */
+  
+  .game-area {
+    flex: 1;
+    min-height: 0;
+  
+    display: grid;
+  
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(280px, 0.55fr);
+  
+    gap: clamp(20px, 4vw, 60px);
+  
+    align-items: center;
+  
+    padding: 10px 20px 5px;
+  }
+  
+  /* =========================
+     WHEEL
+  ========================== */
+  
+  .wheel-section {
+    min-width: 0;
+    min-height: 0;
+  
+    height: 100%;
+  
+    display: flex;
+    flex-direction: column;
+  
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .wheel-container {
+    position: relative;
+  
+    width: min(
+      70vh,
+      48vw,
+      600px
+    );
+  
+    aspect-ratio: 1 / 1;
+  
+    flex-shrink: 1;
+  
+    margin: 0 auto 12px;
+  }
+  
+  canvas {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  
+    box-shadow:
+      0 0 0 6px #000,
+      0 0 0 9px #fd8dc3,
+      0 0 25px rgba(250, 129, 187, 0.7);
+  }
+  
+  /* =========================
+     POINTER
+  ========================== */
+  
+  .pointer {
+    position: absolute;
+  
+    top: -6px;
+    left: 50%;
+  
+    transform: translateX(-50%);
+  
+    z-index: 10;
+  
+    width: 0;
+    height: 0;
+  
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 45px solid white;
+  
+    filter:
+      drop-shadow(0 0 3px #000)
+      drop-shadow(0 0 8px #f77ab6);
+  }
+  
+  /* =========================
+     SPIN BUTTON
+  ========================== */
+  
+  #spinButton {
+    border: none;
+  
+    background:
+      linear-gradient(
+        135deg,
+        #f785bc,
+        #f8b2d1
+      );
+  
+    color: white;
+  
+    font-size: clamp(1rem, 1.5vw, 1.4rem);
+    font-weight: 900;
+  
+    padding: 18px 35px;
+  
+    margin-top: 10px;
 
-      font-size: 1.4rem;
-      font-weight: 900;
-
-      padding: 16px 50px;
-      border-radius: 50px;
-
-      cursor: pointer;
-
-      text-transform: uppercase;
-      letter-spacing: 2px;
-
-      box-shadow:
-        0 5px 0 #a51f61,
-        0 0 20px rgba(255, 79, 163, 0.7);
-
-      transition: all 0.15s ease;
+    border-radius: 50px;
+  
+    cursor: pointer;
+  
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  
+    box-shadow:
+      0 4px 0 #a04573,
+      0 0 20px rgba(247, 162, 203, 0.7);
+  
+    transition: all 0.15s ease;
+  
+    flex-shrink: 0;
+  }
+  
+  #spinButton:hover {
+    transform: translateY(-2px);
+  
+    box-shadow:
+      0 6px 0 #a04573,
+      0 0 30px rgba(255, 79, 163, 0.9);
+  }
+  
+  #spinButton:active {
+    transform: translateY(3px);
+  
+    box-shadow:
+      0 2px 0 #9e4672;
+  }
+  
+  #spinButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  /* =========================
+     GAME REVEAL
+  ========================== */
+  
+  .reveal-section {
+    min-width: 0;
+  
+    display: flex;
+    flex-direction: column;
+  
+    justify-content: center;
+    align-items: center;
+  
+    text-align: center;
+  }
+  
+  .reveal-title {
+    color: #f5b3d3;
+  
+    font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+  
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-weight: bold;
+  
+    margin-bottom: 15px;
+  }
+  
+  .result-box {
+    width: 100%;
+  
+    padding:
+      clamp(25px, 4vw, 50px)
+      clamp(20px, 3vw, 40px);
+  
+    background: #111;
+  
+    border: 3px solid #f5b3d3;
+  
+    border-radius: 22px;
+  
+    min-height: 180px;
+  
+    display: flex;
+    flex-direction: column;
+  
+    justify-content: center;
+    align-items: center;
+  
+    box-shadow:
+      0 0 20px rgba(255, 79, 163, 0.25);
+  }
+  
+  .result-label {
+    color: #f5b3d3;
+  
+    font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+  
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: bold;
+  
+    margin-bottom: 12px;
+  }
+  
+  #result {
+    color: white;
+  
+    font-family: Georgia, serif;
+  
+    font-size:
+      clamp(1.6rem, 3vw, 3rem);
+  
+    line-height: 1.15;
+  
+    font-weight: bold;
+  }
+  
+  /* =========================
+     HEART
+  ========================== */
+  
+  .reveal-heart {
+    color: #f88cc0;
+  
+    font-size:
+      clamp(2rem, 4vw, 4rem);
+  
+    margin-bottom: 12px;
+  
+    text-shadow:
+      0 0 15px rgba(255, 79, 163, 0.8);
+  }
+  
+  /* =========================
+     FOOTER
+  ========================== */
+  
+  .footer {
+    flex-shrink: 0;
+  
+    text-align: center;
+  
+    margin-top: 5px;
+  
+    color: #aaa;
+  
+    font-size: 0.7rem;
+  
+    letter-spacing: 2px;
+  }
+  
+  /* =========================
+     MEDIUM LAPTOPS
+  ========================== */
+  
+  @media (max-height: 750px) and (min-width: 701px) {
+  
+    body {
+      padding: 8px;
     }
-
-    #spinButton:hover {
-      transform: translateY(-2px);
-      box-shadow:
-        0 7px 0 #a51f61,
-        0 0 30px rgba(255, 79, 163, 0.9);
+  
+    .app {
+      height: calc(100vh - 16px);
+      padding: 10px;
     }
-
-    #spinButton:active {
-      transform: translateY(4px);
-      box-shadow:
-        0 2px 0 #a51f61;
+  
+    .banner {
+      height: 85px;
     }
-
-    #spinButton:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      transform: none;
+  
+    .game-area {
+      gap: 20px;
+      padding: 5px 10px;
     }
-
-    /* -------------------------
-       RESULT
-    ------------------------- */
-
-    .result-box {
-      margin-top: 30px;
-      padding: 20px;
-
-      background: #111;
-      border: 2px solid #ff4fa3;
-      border-radius: 18px;
-
-      min-height: 100px;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .result-label {
-      color: #ff78b9;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      font-weight: bold;
+  
+    .wheel-container {
+      width: min(62vh, 45vw, 500px);
       margin-bottom: 8px;
     }
-
+  
+    #spinButton {
+      padding: 9px 28px;
+    }
+  
+    .result-box {
+      min-height: 150px;
+    }
+  }
+  
+  /* =========================
+     SMALLER LAPTOPS
+  ========================== */
+  
+  @media (max-width: 900px) and (min-width: 701px) {
+  
+    .game-area {
+      grid-template-columns:
+        minmax(0, 1fr)
+        minmax(240px, 0.5fr);
+  
+      gap: 15px;
+    }
+  
+    .wheel-container {
+      width: min(60vh, 50vw, 450px);
+    }
+  
+    .banner-text h1 {
+      font-size: 2.3rem;
+    }
+  
+    #spinButton {
+      font-size: 0.9rem;
+      padding: 10px 22px;
+    }
+  }
+  
+  /* =========================
+     MOBILE
+  ========================== */
+  
+  @media (max-width: 700px) {
+  
+    html,
+    body {
+      height: auto;
+      min-height: 100%;
+    }
+  
+    body {
+      padding: 8px;
+  
+      overflow-y: auto;
+      overflow-x: hidden;
+  
+      align-items: flex-start;
+    }
+  
+    .app {
+      height: auto;
+      min-height: calc(100vh - 16px);
+  
+      padding: 12px;
+  
+      border-radius: 18px;
+  
+      overflow: visible;
+    }
+  
+    .banner {
+      height: 115px;
+      flex-shrink: 0;
+    }
+  
+    .banner-text h1 {
+      font-size:
+        clamp(1.8rem, 9vw, 2.8rem);
+  
+      letter-spacing: 2px;
+    }
+  
+    .banner-text p {
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+    }
+  
+    .game-area {
+      display: flex;
+      flex-direction: column;
+  
+      gap: 15px;
+  
+      padding: 15px 5px;
+    }
+  
+    .wheel-section {
+      height: auto;
+    }
+  
+    .wheel-container {
+      width: min(85vw, 430px);
+      margin-bottom: 15px;
+    }
+  
+    .pointer {
+      border-left-width: 17px;
+      border-right-width: 17px;
+      border-top-width: 38px;
+    }
+  
+    #spinButton {
+      width: 90%;
+  
+      font-size: 1rem;
+  
+      padding: 13px 20px;
+    }
+  
+    .reveal-section {
+      width: 100%;
+    }
+  
+    .result-box {
+      min-height: 130px;
+      padding: 25px 15px;
+    }
+  
     #result {
-      color: white;
-      font-family: Georgia, serif;
-      font-size: clamp(1.5rem, 5vw, 2.5rem);
-      font-weight: bold;
+      font-size:
+        clamp(1.5rem, 8vw, 2.3rem);
     }
-
-    /* -------------------------
-       FOOTER
-    ------------------------- */
-
+  
+    .reveal-heart {
+      display: none;
+    }
+  
     .footer {
-      margin-top: 20px;
-      color: #aaa;
-      font-size: 0.8rem;
-      letter-spacing: 1px;
+      margin-top: 0;
+      padding-bottom: 5px;
     }
-
-    /* -------------------------
-       MOBILE
-    ------------------------- */
-
-    @media (max-width: 600px) {
-
-      body {
-        padding: 10px;
-      }
-
-      .app {
-        padding: 15px;
-        border-radius: 18px;
-      }
-
-      .banner {
-        min-height: 120px;
-      }
-
-      .wheel-container {
-        width: 88vw;
-      }
-
-      #spinButton {
-        width: 90%;
-        font-size: 1.1rem;
-      }
+  }
+  
+  /* =========================
+     VERY SHORT SCREENS
+  ========================== */
+  
+  @media (max-height: 600px) and (min-width: 701px) {
+  
+    .banner {
+      height: 65px;
     }
-  </style>
-</head>
-
-<body>
-
-  <div class="app">
-
-    <!-- =========================
-         BANNER
-    ========================== -->
-
-    <div class="banner">
-
-      <!--
-        OPTIONAL:
-        Replace this entire banner-text section
-        with your own image if you want.
-
-        Example:
-
-        <img src="your-banner.jpg"
-             alt="Birthday Banner"
-             style="width:100%; height:100%; object-fit:cover;">
-      -->
-
-      <div class="banner-text">
-        <h1>25 & Fabulous</h1>
-        <p>GAME NIGHT</p>
-      </div>
-
+  
+    .banner-text h1 {
+      font-size: 1.8rem;
+    }
+  
+    .banner-text p {
+      display: none;
+    }
+  
+    .wheel-container {
+      width: min(58vh, 42vw, 400px);
+    }
+  
+    .result-box {
+      min-height: 120px;
+      padding: 15px;
+    }
+  
+    .reveal-heart {
+      font-size: 2rem;
+      margin-bottom: 5px;
+    }
+  
+    .result-label {
+      margin-bottom: 6px;
+    }
+  
+    .footer {
+      display: none;
+    }
+  }
+  
+  </style> </head> <body> <div class="app">
+  <!-- =========================
+       BANNER
+  ========================== -->
+  
+  <div class="banner">
+  
+    <div class="banner-text">
+  
+      <h1>Chapter 25: Let the Games Begin</h1>
+  
+      <p>GAME NIGHT</p>
+  
     </div>
-
-
+  
+  </div>
+  
+  <!-- =========================
+       MAIN GAME AREA
+  ========================== -->
+  
+  <div class="game-area">
+  
     <!-- =========================
          WHEEL
     ========================== -->
-
-    <div class="wheel-container">
-
-      <div class="pointer"></div>
-
-      <canvas id="wheel" width="600" height="600"></canvas>
-
+  
+    <div class="wheel-section">
+  
+      <div class="wheel-container">
+  
+        <div class="pointer"></div>
+  
+        <canvas
+          id="wheel"
+          width="600"
+          height="600">
+        </canvas>
+  
+      </div>
+  
+      <!-- =========================
+           SPIN BUTTON
+      ========================== -->
+  
+      <button id="spinButton">
+        ✨ SPIN THE WHEEL ✨
+      </button>
+  
     </div>
-
-
+  
     <!-- =========================
-         BUTTON
+         GAME REVEAL
     ========================== -->
-
-    <button id="spinButton">
-      ✨ SPIN THE WHEEL ✨
-    </button>
-
-
-    <!-- =========================
-         RESULT
-    ========================== -->
-
-    <div class="result-box">
-
-      <div class="result-label">
+  
+    <div class="reveal-section">
+  
+      <div class="reveal-heart">
+        💗
+      </div>
+  
+      <div class="reveal-title">
         Your Game Is...
       </div>
-
-      <div id="result">
-        Ready?
+  
+      <div class="result-box">
+  
+        <div class="result-label">
+          Get Ready!
+        </div>
+  
+        <div id="result">
+          Ready?
+        </div>
+  
       </div>
-
+  
     </div>
-
-
-    <div class="footer">
-      💗 LET THE GAMES BEGIN 💗
-    </div>
-
+  
   </div>
-
-
-<script>
-
+  
+  <!-- =========================
+       FOOTER
+  ========================== -->
+  
+  <div class="footer">
+    💗 LET THE GAMES BEGIN 💗
+  </div>
+  
+  </div> <script>
   /* ==========================================
      GAME OPTIONS
   ========================================== */
-
+  
   const games = [
     "Who Knows Me Best",
     "Would I Rather",
@@ -357,46 +672,55 @@
     "Put a Finger Down",
     "Intoxicated"
   ];
-
-
+  
   /* ==========================================
      WHEEL COLORS
   ========================================== */
-
+  
   const colors = [
-    "#ff4fa3",
-    "#000000",
-    "#ff78b9",
-    "#111111",
-    "#ff4fa3",
-    "#000000",
-    "#ff78b9",
-    "#111111"
+    "#f8b2d1",
+    "#f785bc",
+    "#f8b2d1",
+    "#f785bc",
+    "#f8b2d1",
+    "#f785bc",
+    "#f8b2d1",
+    "#f785bc"
   ];
-
-
+  
   /* ==========================================
      CANVAS SETUP
   ========================================== */
-
-  const canvas = document.getElementById("wheel");
-  const ctx = canvas.getContext("2d");
-
-  const spinButton = document.getElementById("spinButton");
-  const result = document.getElementById("result");
-
-  const centerX = canvas.width / 2;
-  const centerY = canvas.height / 2;
-
-  const radius = canvas.width / 2 - 8;
-
-  const sliceAngle = (2 * Math.PI) / games.length;
-
-
+  
+  const canvas =
+    document.getElementById("wheel");
+  
+  const ctx =
+    canvas.getContext("2d");
+  
+  const spinButton =
+    document.getElementById("spinButton");
+  
+  const result =
+    document.getElementById("result");
+  
+  const centerX =
+    canvas.width / 2;
+  
+  const centerY =
+    canvas.height / 2;
+  
+  const radius =
+    canvas.width / 2 - 8;
+  
+  const sliceAngle =
+    (2 * Math.PI) / games.length;
+  
   /* ==========================================
      DRAW THE WHEEL
   ========================================== */
-
+  
+ 
   function drawWheel(rotation = 0) {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -433,7 +757,7 @@
 
       /* Slice border */
 
-      ctx.strokeStyle = "#ffffff";
+      ctx.strokeStyle = "#000000";
       ctx.lineWidth = 3;
 
       ctx.stroke();
@@ -443,7 +767,7 @@
 
       ctx.save();
 
-      ctx.translate(centerX, centerY);
+      ctx.translate(centerX, centerY );
 
       ctx.rotate(
         startAngle + sliceAngle / 2
@@ -455,7 +779,7 @@
       ctx.fillStyle = "#ffffff";
 
       ctx.font =
-        "bold 17px Arial";
+        "bold 20px Arial";
 
       /* Split longer titles */
 
@@ -526,8 +850,8 @@
     ctx.fillStyle = "#000";
     ctx.fill();
 
-    ctx.strokeStyle = "#ff4fa3";
-    ctx.lineWidth = 6;
+    ctx.strokeStyle = "#000000";
+    ctx.lineWidth = 2;
     ctx.stroke();
 
 
@@ -535,177 +859,185 @@
 
     ctx.fillStyle = "#ff4fa3";
 
-    ctx.font = "bold 20px Arial";
+    ctx.font = "bold 35px Arial";
 
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
 
     ctx.fillText(
-      "25",
+      "💗",
       centerX,
       centerY
     );
 
   }
-
-
+  
   /* ==========================================
      SPIN LOGIC
   ========================================== */
-
+  
   let currentRotation = 0;
-
+  
   let spinning = false;
-
-
-  spinButton.addEventListener("click", () => {
-
-    if (spinning) return;
-
-    spinning = true;
-
-    spinButton.disabled = true;
-
-    result.textContent = "Spinning...";
-
-
-    /*
-      Pick a random winning game
-    */
-
-    const winningIndex =
-      Math.floor(
-        Math.random() * games.length
-      );
-
-
-    /*
-      We want the selected slice to
-      finish underneath the pointer.
-
-      The pointer is at the top
-      (-90 degrees).
-    */
-
-    const targetAngle =
-      -Math.PI / 2
-      -
-      (
-        winningIndex * sliceAngle
-        +
-        sliceAngle / 2
-      );
-
-
-    /*
-      Add several full rotations
-      for a dramatic spin.
-    */
-
-    const extraSpins =
-      5 + Math.floor(Math.random() * 3);
-
-
-    const finalRotation =
-      currentRotation
-      +
-      extraSpins * Math.PI * 2
-      +
-      normalizeAngle(
-        targetAngle - currentRotation
-      );
-
-
-    const startRotation =
-      currentRotation;
-
-
-    const rotationDifference =
-      finalRotation - startRotation;
-
-
-    const duration = 5000;
-
-    const startTime =
-      performance.now();
-
-
-    function animate(currentTime) {
-
-      const elapsed =
-        currentTime - startTime;
-
-      const progress =
-        Math.min(elapsed / duration, 1);
-
-
+  
+  spinButton.addEventListener(
+    "click",
+    () => {
+  
+      if (spinning) return;
+  
+      spinning = true;
+  
+      spinButton.disabled = true;
+  
+      result.textContent =
+        "Spinning...";
+  
       /*
-        Ease-out animation.
-        Starts fast and gradually slows down.
+        Pick a random winning game
       */
-
-      const eased =
-        1 - Math.pow(1 - progress, 4);
-
-
-      currentRotation =
-        startRotation
+  
+      const winningIndex =
+        Math.floor(
+          Math.random() *
+          games.length
+        );
+  
+      /*
+        Position the selected slice
+        underneath the pointer.
+      */
+  
+      const targetAngle =
+        -Math.PI / 2
+        -
+        (
+          winningIndex *
+          sliceAngle
+          +
+          sliceAngle / 2
+        );
+  
+      /*
+        Add several full rotations
+        for a dramatic spin.
+      */
+  
+      const extraSpins =
+        5 +
+        Math.floor(
+          Math.random() * 3
+        );
+  
+      const finalRotation =
+        currentRotation
         +
-        rotationDifference * eased;
-
-
-      drawWheel(currentRotation);
-
-
-      if (progress < 1) {
-
-        requestAnimationFrame(animate);
-
-      } else {
-
+        extraSpins *
+        Math.PI *
+        2
+        +
+        normalizeAngle(
+          targetAngle -
+          currentRotation
+        );
+  
+      const startRotation =
+        currentRotation;
+  
+      const rotationDifference =
+        finalRotation -
+        startRotation;
+  
+      const duration = 5000;
+  
+      const startTime =
+        performance.now();
+  
+      function animate(currentTime) {
+  
+        const elapsed =
+          currentTime -
+          startTime;
+  
+        const progress =
+          Math.min(
+            elapsed / duration,
+            1
+          );
+  
+        /*
+          Ease-out animation.
+        */
+  
+        const eased =
+          1 -
+          Math.pow(
+            1 - progress,
+            4
+          );
+  
         currentRotation =
-          finalRotation;
-
-        drawWheel(currentRotation);
-
-        result.textContent =
-          games[winningIndex];
-
-        spinning = false;
-
-        spinButton.disabled = false;
-
+          startRotation +
+          rotationDifference *
+          eased;
+  
+        drawWheel(
+          currentRotation
+        );
+  
+        if (progress < 1) {
+  
+          requestAnimationFrame(
+            animate
+          );
+  
+        } else {
+  
+          currentRotation =
+            finalRotation;
+  
+          drawWheel(
+            currentRotation
+          );
+  
+          result.textContent =
+            games[winningIndex];
+  
+          spinning = false;
+  
+          spinButton.disabled =
+            false;
+  
+        }
+  
       }
-
+  
+      requestAnimationFrame(
+        animate
+      );
+  
     }
-
-
-    requestAnimationFrame(animate);
-
-  });
-
-
+  );
+  
   /* ==========================================
      NORMALIZE ANGLE
   ========================================== */
-
+  
   function normalizeAngle(angle) {
-
+  
     return (
       (angle + Math.PI * 2)
       %
       (Math.PI * 2)
     );
-
+  
   }
-
-
+  
   /* ==========================================
      INITIAL DRAW
   ========================================== */
-
+  
   drawWheel();
-
 </script>
 
 </body>
